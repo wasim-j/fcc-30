@@ -1,19 +1,9 @@
-/*
-*
-*
-*       Complete the API routing below
-*
-*
-*/
-
 'use strict';
 
-var expect = require('chai').expect;
+const route_threads = require("./threads");
+const route_replies = require("./replies");
 
-module.exports = function (app) {
-  
-  app.route('/api/threads/:board');
-    
-  app.route('/api/replies/:board');
-
+module.exports = app => {
+  route_threads(app);
+  route_replies(app);
 };
