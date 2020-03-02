@@ -4,6 +4,7 @@ const express     = require('express');
 const bodyParser  = require('body-parser');
 const expect      = require('chai').expect;
 const cors        = require('cors');
+const helmet      = require("helmet");
 
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
@@ -13,6 +14,10 @@ const connect_to_db     = require('./connect_to_db');
 let db = connect_to_db();
 
 const app = express();
+
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.frameguard({ action: 'sameorigin' }));
+app.use(helmet.referrerPolicy({ policy: 'same-origin' }))
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
